@@ -1,0 +1,115 @@
+
+h1, p {
+  font-family: Lato;
+}
+body{
+  background:linear-gradient(-65deg,#17c0eb,#a1c7ee);
+  height: 100vh;
+}
+#bgColor{
+  overflow: hidden;
+}
+#bgColor div{
+  position: absolute;
+  width: 100vh;
+  height: 100vh;
+  /* border-radius: 50%; */
+  background:linear-gradient(#6e8caa,#18dd6a);
+  z-index: -1;
+  transform: rotate(-25deg);
+  left:-30vh;
+  top:-20vh;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+#navBar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#navBar h1{
+  background-color: #7d5fff;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding:5px 30px;
+  box-shadow: 2px 1px 5px rgba(0,0,0,0.2),-2px 4px 5px rgba(0,0,0,0.5);
+}
+#navBar p{
+  display: flex;
+  gap:10px;
+  font-size: 20px;
+  margin: 0px 4px;
+  cursor: pointer;
+  background-color: #4b6584;
+  box-shadow: 2px 1px 5px rgba(0,0,0,0.2),-2px 4px 5px rgba(0,0,0,0.5);
+  border: 2px solid rgb(224, 223, 223);
+  color:white;
+  padding: 5px;
+  padding-right: 9px;
+  border-radius: 5px;
+}
+#taskContainer{
+  display: grid;
+  place-content: center;
+}
+.tasks{
+  position: relative;
+  display: flex;
+  gap:5px;
+  margin: 3px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: -3px 3px 5px rgba(0,0,0,0.5),2px -2px 5px rgba(0,0,0,0.2);
+}
+.tasks input{
+  background-color: transparent;
+  outline: none;
+  border: none;
+  min-width:170px;
+  max-width: 500px;
+  width: 50vw;
+  font-size:20px;
+}
+.tasks input:focus{
+  border-bottom: 2px solid #b2b3b2;
+}
+.tasks .taskDone{
+  text-decoration: line-through;
+}
+.material-icons{
+  cursor: pointer;
+  font-size: 28px;
+}
+.checkToolTip{
+  /* visibility: hidden; */
+  position: absolute;
+  top:-19px;
+  left:-15px;
+  background-color: whitesmoke;
+  padding:2px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.checkToolTip::before{
+  content:'';
+  width:10px;
+  height: 10px;
+  background-color: whitesmoke;
+  position:absolute;
+  transform: rotate(45deg);
+  left:37px;
+  top: 17px;
+}
+
+
+.check{
+  color:white;
+  background-color: #54ca7d;
+  border-radius: 50%;
+}
+
+.delete{
+  color:red;
+}
