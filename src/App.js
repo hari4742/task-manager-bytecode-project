@@ -1,20 +1,21 @@
 import React from 'react';
 import './style.css';
+import React, { useState } from 'react';
 
 function Navbar(props) {
   return (
     <div id="navBar">
       <h1>To Do List</h1>
-      <p onClick={props.addTask}>
-        <span className="material-icons">add_task </span>
-        Add Task
-      </p>
+      <div id="taskInput">
+        <input onChange={props.setTaskName} placeholder='Enter Task Name' type="text" />
+        <p onClick={props.addTask}>
+          <span className="material-icons">add_task </span>
+          Add Task
+        </p>
+      </div>
     </div>
   );
 }
-
-
-
 
 class Task extends React.Component {
   isDone = true;
@@ -25,7 +26,8 @@ class Task extends React.Component {
     checkStyle: { backgroundColor: 'red' },
     checkContent: 'close',
     toolTipContent: 'Mark as Done',
-    inputClass: ''
+    inputClass: '',
+    taskName : this.props.taskName
   };
   markDone = () => {
     if (this.isDone) {
@@ -52,6 +54,10 @@ class Task extends React.Component {
   hideToolTip = () => {
     this.setState({ checkMarkStyle: { display: 'none' } });
   };
+  handleRename = (el)=>{
+    this.setState({taskName:el.target.value});
+    console.log(el.target.value);
+  }
   render() {
     return (
       <div className="tasks">
@@ -69,6 +75,8 @@ class Task extends React.Component {
         </span>
         <input
           type="text"
+          onChange={this.handleRename}
+          value={this.state.taskName}
           className={this.state.inputClass}
           placeholder="Enter Task"
         />
@@ -80,19 +88,29 @@ class Task extends React.Component {
   }
 }
 
-
-
 // App Component
 
 export default class App extends React.Component {
-  listOfTasks = [0];
+  listOfTasks = [];
   state = {
-    taskList: this.listOfTasks
+    taskList: this.listOfTasks,
+    taskName: ''
+  };
+  handleChange = el => {
+    this.setState({
+      taskName: el.target.value
+    });
+    el.preventDefault;
   };
   handleAddTask = () => {
-    this.listOfTasks.unshift(
-      Math.random().toFixed(3) * Math.random().toFixed(3)
-    );
+    if(this.state.taskName == ''){
+      alert("Please Enter a Task to add.")
+      return;
+    }
+    this.listOfTasks.unshift({
+      id: Math.random().toFixed(3) * Math.random().toFixed(3),
+      value: this.state.taskName
+    });
     this.setState({
       taskList: this.listOfTasks
     });
@@ -106,12 +124,13 @@ export default class App extends React.Component {
   render() {
     return (
       <div id="appContainer">
-        <Navbar addTask={this.handleAddTask} />
+        <Navbar addTask={this.handleAddTask} setTaskName={this.handleChange} />
         <div id="taskContainer">
           {this.state.taskList.map(task => {
             return (
               <Task
-                key={task}
+                key={task.id}
+                taskName={task.value}
                 onDelete={() => {
                   this.handleDelete(task);
                 }}
