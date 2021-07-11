@@ -7,15 +7,15 @@ function Navbar(props) {
     <div id="navBar">
       <h1>To Do List</h1>
       <div id="taskInput">
-        <input
+        <input  id='EntertaskInput'
           onChange={props.setTaskName}
           placeholder="Enter Task Name"
           type="text"
         />
         <p
-          onClick={(el) => {
+          onClick={() => {
             props.addTask();
-            el.target.previousSibling.value != ''?el.target.previousSibling.value='':null;
+            document.getElementById("EntertaskInput").value ='';
           }}
         >
           <span className="material-icons">add_task </span>
