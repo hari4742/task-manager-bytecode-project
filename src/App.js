@@ -15,7 +15,7 @@ function Navbar(props) {
         <p
           onClick={(el) => {
             props.addTask();
-            el.target.previousSibling.value = '';
+            el.target.previousSibling.value != ''?el.target.previousSibling.value='':null;
           }}
         >
           <span className="material-icons">add_task </span>
@@ -109,7 +109,6 @@ export default class App extends React.Component {
     this.setState({
       taskName: el.target.value
     });
-    el.preventDefault;
   };
   handleAddTask = () => {
     if (this.state.taskName == '') {
@@ -121,7 +120,8 @@ export default class App extends React.Component {
       value: this.state.taskName
     });
     this.setState({
-      taskList: this.listOfTasks
+      taskList: this.listOfTasks,
+      taskName:''
     });
   };
   handleDelete = id => {
