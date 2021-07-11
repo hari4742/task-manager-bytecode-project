@@ -7,8 +7,17 @@ function Navbar(props) {
     <div id="navBar">
       <h1>To Do List</h1>
       <div id="taskInput">
-        <input onChange={props.setTaskName} placeholder='Enter Task Name' type="text" />
-        <p onClick={props.addTask}>
+        <input
+          onChange={props.setTaskName}
+          placeholder="Enter Task Name"
+          type="text"
+        />
+        <p
+          onClick={(el) => {
+            props.addTask();
+            el.target.previousSibling.value = '';
+          }}
+        >
           <span className="material-icons">add_task </span>
           Add Task
         </p>
@@ -27,7 +36,7 @@ class Task extends React.Component {
     checkContent: 'close',
     toolTipContent: 'Mark as Done',
     inputClass: '',
-    taskName : this.props.taskName
+    taskName: this.props.taskName
   };
   markDone = () => {
     if (this.isDone) {
@@ -54,10 +63,10 @@ class Task extends React.Component {
   hideToolTip = () => {
     this.setState({ checkMarkStyle: { display: 'none' } });
   };
-  handleRename = (el)=>{
-    this.setState({taskName:el.target.value});
+  handleRename = el => {
+    this.setState({ taskName: el.target.value });
     console.log(el.target.value);
-  }
+  };
   render() {
     return (
       <div className="tasks">
@@ -103,8 +112,8 @@ export default class App extends React.Component {
     el.preventDefault;
   };
   handleAddTask = () => {
-    if(this.state.taskName == ''){
-      alert("Please Enter a Task to add.")
+    if (this.state.taskName == '') {
+      alert('Please Enter a Task to add.');
       return;
     }
     this.listOfTasks.unshift({
